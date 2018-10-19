@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>    <script>
+        $(function(){
+            var $registerBox = $('#register');
+            $registerBox.find('input.register_btn').click(function(e){
+                e.preventDefault();
+                $.ajax({
+                    url:'http://localhost:8081/admin/register',
+                    type:'post',
+                    data:{
+                        userName: $registerBox.find('[name = "username"]').val(),
+                        userPassword: $registerBox.find('[name = "password"]').val(),
+                    },
+                    success:function (data)  {
+                        console.log(data);
+                    },
+                    error: function(res) {
+                        console.log('出错：'+JSON.stringify(res));
+                    }
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+<div id = "register"> <br/>
+    用户名：<input type="text" name="username"/><br/><br/>
+    密码：<input type="password" name="password"/><br/><br/>
+    重复密码：<input type="password" name="repassword"/><br/><br/>
+    <input type="submit" value="注册" class="register_btn"/>
+</div>
+</body>
+</html>
