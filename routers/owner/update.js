@@ -7,7 +7,7 @@
 var update = function(db,ownInfo, blogSql, callback) {
     db.query(blogSql.modifyOwner,[
         ownInfo.nickname, ownInfo.name, ownInfo.title,
-        ownInfo.age, ownInfo.sex, ownInfo.email,
+        ownInfo.birth, ownInfo.sex, ownInfo.email,
         ownInfo.job, ownInfo.address, ownInfo.motto
     ], function(err, data) {
         if(err) {

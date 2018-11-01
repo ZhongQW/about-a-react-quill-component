@@ -14,10 +14,12 @@ const deleteArticle = require('./delete');
 const updateArticle = require('./update');
 const allArticle = require('./allArticle');
 const oneArticle = require('./oneArticle');
+const oneArticleText = require('./oneArticleText');
 
 //增加文章
 router.use('/add',function(req,res,next){
-    addArticle(db, req.body.articleInfo, function(data){
+    // console.log(req.body);
+    addArticle(db, req.body.title, req.body.type, req.body.value, blogSql, function(data){
         res.send(data);
     })
 });
@@ -36,7 +38,8 @@ router.use('/delete',function(req,res,next){
 });
 //修改文章
 router.use('/update',function(req,res,next){
-    updateArticle(db, req.body.data, function(data){
+    console.log(req.body.val);
+    updateArticle(db, req.body.id,req.body.val , blogSql,  function(data){
         res.send(data);
     })
 });
@@ -46,7 +49,15 @@ router.use('/getone',function(req,res,next){
     // console.log(req.body.id);
     oneArticle(db,id,blogSql,function(data){
         res.send(data);
-        console.log(data);
+    })
+});
+//获取某一篇文章的内容
+router.use('/getonetext',function(req,res,next){
+    var id = req.body.id;
+    // console.log(id);
+    oneArticleText(db,id,blogSql,function(data){
+        // console.log(data);
+        res.send(data);
     })
 });
 

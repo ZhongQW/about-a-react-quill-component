@@ -1,13 +1,12 @@
 /*
     Create by WebStorm.
     User: ZhongQw
-    Date: 2018/10/5
-    Time: 18:01
+    Date: 2018/10/31
+    Time: 17:21
 */
-var get = function(db, callback) {
-    var sql = 'select * from `owner`';
-    db.query(sql, function(err, data) {
-        console.log(data);
+var oneArticle = function(db,id,blogSql,callback) {
+    db.query(blogSql.getArticleWords, [id], function(err,data){
+        console.log(JSON.parse(JSON.stringify(data)));
         if(err) {
             callback({
                 'error' : true,
@@ -22,4 +21,4 @@ var get = function(db, callback) {
     })
 };
 
-module.exports = get;
+module.exports = oneArticle;

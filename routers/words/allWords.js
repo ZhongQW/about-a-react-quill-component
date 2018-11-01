@@ -4,9 +4,8 @@
     Date: 2018/10/5
     Time: 17:53
 */
-const allWords = function(db,callback){
-    var sql = "select * from `words`";
-    db.query(sql,function(err,data){
+const allWords = function(db, blogSql, callback){
+    db.query(blogSql.getAllBlogWords, [], function(err,data){
         if(err){
             callback({
                 'error': true,
