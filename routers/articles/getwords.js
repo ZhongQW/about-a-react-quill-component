@@ -6,7 +6,7 @@
 */
 var oneArticle = function(db,id,blogSql,callback) {
     db.query(blogSql.getArticleWords, [id], function(err,data){
-        console.log(JSON.parse(JSON.stringify(data)));
+        // console.log(JSON.parse(JSON.stringify(data)));
         if(err) {
             callback({
                 'error' : true,

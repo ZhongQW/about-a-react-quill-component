@@ -18,8 +18,10 @@ let BlogSQL = {
     addArticle: "insert into article (articleId, articleTitle, articleType, articleContent) values(NULL, ?, ?, ?)",
     oneArticleText: "select articleContent, articleTitle from article where articleId = ?",
     getAllBlogWords: "select wordsBlogId, wordsPersonName, wordsPersonEmail, wordsTime, wordsContent, wordsReply from wordsPerson, blogWords where wordsPerson.wordsPersonId = blogWords.wordsPersonId;",
-    getArticleWords: "select  wordsPersonName, wordsPersonEmail, wordsArticleId, wordsContent, wordsTime, wordsReply from wordsperson, articlewords where  wordsperson.wordsPersonId = articlewords.wordsPersonId and articlewords.articleId = ?;",
-
+    getArticleWords: "select  wordsPersonName, wordsPersonEmail, articleId, wordsArticleId, wordsContent, wordsTime, wordsReply from wordsperson, articlewords where  wordsperson.wordsPersonId = articlewords.wordsPersonId and articlewords.articleId = ?;",
+    articleDelWords: "delete from articlewords where wordsArticleId = ?",
+    articleReplyWords: "update articlewords set wordsReply = ? where wordsArticleId = ?",
+    articleDelReply: "update articlewords set wordsReply = '' where wordsArticleId = ?",
 };
 
 module.exports = BlogSQL;

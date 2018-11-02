@@ -14,12 +14,12 @@ const deleteBlogWords = require('./deleteBlogWords');
 const getPerson = require('./getPerson');
 const replyWords = require('./replyWords');
 const delBlogReplyWords = require('./delBlogReply');
-const getWords = require('./getwords');
 const addWords = require('./addwords');
 const addUser = require('./adduser');
 
 //获取所有留言
 router.use('/getall',function(req,res,next){
+    // console.log(req.body.id);
     allWords(db, blogSql, function(data){
         res.send(data);
     })
@@ -66,13 +66,6 @@ router.use('/adduser',function(req,res,next){
         res.send(data);
     })
 });
-//得到某一个文章下所有的留言
-router.use('/getwords',function(req,res,next){
-    // console.log(req.body);
-    getWords(db, req.body.id, blogSql, function(data){
-        // console.log(data);
-        res.send(data);
-    })
-});
+
 
 module.exports = router;

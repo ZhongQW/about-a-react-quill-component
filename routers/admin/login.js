@@ -6,7 +6,7 @@
 */
 var login = function(db,name,password,common, callback) {
     password = common.md5(password);
-    // console.log(password);
+    console.log(password);
     var sql = "select * from user where userName = '" +name+ "' ";
     db.query(sql, function(err, data) {
         if(err) {

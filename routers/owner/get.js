@@ -7,7 +7,7 @@
 var get = function(db, callback) {
     var sql = 'select * from `owner`';
     db.query(sql, function(err, data) {
-        console.log(data);
+        // console.log(data);
         if(err) {
             callback({
                 'error' : true,

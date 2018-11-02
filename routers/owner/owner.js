@@ -22,7 +22,7 @@ router.use('/get',function(req,res,next){
 //修改个人信息
 router.use('/update',function(req,res,next){
     var ownInfo = req.body;
-    console.log(ownInfo);
+    // console.log(ownInfo);
     update(db,ownInfo,blogSql,function(data){
         res.send(data);
     })

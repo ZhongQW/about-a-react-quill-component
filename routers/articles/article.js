@@ -16,6 +16,11 @@ const allArticle = require('./allArticle');
 const oneArticle = require('./oneArticle');
 const oneArticleText = require('./oneArticleText');
 
+const getWords = require('./getwords');
+const articleDelWords = require('./articleDelWords');
+const articleReplyWords = require('./articleReplyWords');
+const articleDelReply = require('./articleDelReply');
+
 //增加文章
 router.use('/add',function(req,res,next){
     // console.log(req.body);
@@ -56,6 +61,44 @@ router.use('/getonetext',function(req,res,next){
     var id = req.body.id;
     // console.log(id);
     oneArticleText(db,id,blogSql,function(data){
+        // console.log(data);
+        res.send(data);
+    })
+});
+
+//得到某一个文章下所有的留言
+router.use('/getwords',function(req,res,next){
+    // console.log(req.body);
+    getWords(db, req.body.id, blogSql, function(data){
+        // console.log(data);
+        res.send(data);
+    })
+});
+//删除某一篇文章的某一条留言
+    router.use('/articledelwords',function(req,res,next){
+        const wordsId = req.body.wordsId;
+        const articleId = req.body.articleId;
+        articleDelWords(db, wordsId, articleId, blogSql,function(data){
+        // console.log(data);
+        res.send(data);
+    })
+});
+//回复某一篇文章的某一条留言
+router.use('/articlereplywords',function(req,res,next){
+    // console.log(req.body);
+    const wordsId = req.body.wordsId;
+    const replyValue = req.body.replyValue;
+    const articleId = req.body.articleId;
+    articleReplyWords(db, wordsId, articleId,replyValue, blogSql,function(data){
+        // console.log(data);
+        res.send(data);
+    })
+});
+//删除某一篇文章的某一条留言的回复
+router.use('/articledelreply',function(req,res,next){
+    const wordsId = req.body.wordsId;
+    const articleId = req.body.articleId;
+    articleDelReply(db, wordsId, articleId, blogSql, function(data){
         // console.log(data);
         res.send(data);
     })

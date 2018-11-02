@@ -5,8 +5,8 @@ create table user(
     userName varchar(40) not null,
     userPassword varchar(70) not null
 );
-insert into user values (NULL, 'zhongqw_00', '123qwe');
-insert into user values (NULL, 'zqw', '123qwe');
+insert into user values (NULL, 'zhongqw_00', 'b2377a90c58c35dbdb9ec5cb35ac9797');
+insert into user values (NULL, 'zqw', 'b2377a90c58c35dbdb9ec5cb35ac9797');
 create table article(
     articleId int not null PRIMARY KEY auto_increment,
     articleType varchar(4) not null,
