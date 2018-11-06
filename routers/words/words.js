@@ -14,8 +14,10 @@ const deleteBlogWords = require('./deleteBlogWords');
 const getPerson = require('./getPerson');
 const replyWords = require('./replyWords');
 const delBlogReplyWords = require('./delBlogReply');
-const addWords = require('./addwords');
+const addArticleWords = require('./addArticleWords');
 const addUser = require('./adduser');
+
+const getBlogWords = require('./getBlogWords');
 
 //获取所有留言
 router.use('/getall',function(req,res,next){
@@ -53,16 +55,24 @@ router.use('/deletereply',function(req,res,next){
     })
 });
 //增加一条留言
-router.use('/addwords',function(req,res,next){
-    // console.log(req.body.id);
-    addWords(db, req.body, blogSql, function(data){
+router.use('/addarticlewords',function(req,res,next){
+    console.log(req.body);
+    addArticleWords(db, req.body, blogSql, function(data){
         res.send(data);
     })
 });
 //增加一个留言者的信息
 router.use('/adduser',function(req,res,next){
-    // console.log(req.body.id);
+    // console.log(req.body);
     addUser(db, req.body.wordsName, req.body.wordsEmail, blogSql, function(data){
+        res.send(data);
+    })
+});
+
+//获得所有博客留言
+router.use('/getblogwords',function(req,res,next){
+    console.log(req.body);
+    getBlogWords(db, blogSql, function(data){
         res.send(data);
     })
 });

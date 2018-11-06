@@ -31,6 +31,7 @@ router.use('/add',function(req,res,next){
 //获取所有文章
 router.use('/getall',function(req,res,next){
     allArticle(db,function(data){
+        // console.log(data);
         res.send(data);
     })
 });
@@ -43,7 +44,7 @@ router.use('/delete',function(req,res,next){
 });
 //修改文章
 router.use('/update',function(req,res,next){
-    console.log(req.body.val);
+    // console.log(req.body.val);
     updateArticle(db, req.body.id,req.body.val , blogSql,  function(data){
         res.send(data);
     })

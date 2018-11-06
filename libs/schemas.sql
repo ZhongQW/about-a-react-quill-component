@@ -25,7 +25,7 @@ create table articleWords(
     wordsTime TIMESTAMP  not null DEFAULT CURRENT_TIMESTAMP,
     wordsReply text default null,
     FOREIGN KEY (wordsPersonId) REFERENCES wordsPerson(wordsPersonId),
-    FOREIGN KEY (articleId) REFERENCES article(articleId)
+    FOREIGN KEY (articleId) REFERENCES article(articleId) ON DELETE CASCADE
 );
 create table blogWords(
     wordsBlogId int not null auto_increment  PRIMARY KEY,
@@ -53,15 +53,14 @@ create table owner(
     motto varchar(200) not null
 );
 insert into article (articleId, articleType, articleTitle,  articleContent) values(NULL, 1, 'java类的继承', '这是java 类的继承！');
-insert into article (articleId, articleType, articleTitle,  articleContent) values(NULL, 2, '日记', '这是日记！');
 insert into article (articleId, articleType, articleTitle,  articleContent) values(NULL, 1, '技术闲谈', '这是技术闲谈！');
 insert into article (articleId, articleType, articleTitle,  articleContent) values(NULL, 1, '悲惨世界', '一本书的影评！');
 
-insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values(NULL, 1, 2, '写的真好！');
-insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values (NULL, 2, 1, '加油哦，博主！');
-insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values (NULL, 1, 3, '加油哦，博主！');
-insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values (NULL, 1, 2, '厉害哦，博主！');
-insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values (NULL, 2, 1, '哈哈！');
+insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values(NULL, 1, 8, '写的真好！');
+insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent, wordsReply) values (NULL, 2, 8, '加油哦，博主！', '哈哈哈哈，谢谢你哦！');
+insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values (NULL, 1, 12, '加油哦，博主！');
+insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values (NULL, 1, 13, '厉害哦，博主！');
+insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values (NULL, 2, 14, '哈哈！');
 
 insert into blogWords (wordsBlogId, wordsPersonId, wordsContent) values(NULL, 1, '加油哦！');
 insert into blogWords (wordsBlogId, wordsPersonId, wordsContent) values (NULL, 2, '博主写的很好，博主继续加油！');
@@ -74,3 +73,4 @@ insert into owner (id, nickname, name, title, birth, sex, email, job, address, m
 select wordsBlogId, wordsPersonName, wordsPersonEmail, wordsTime, wordsContent, wordsReply from wordsPerson, blogWords where wordsPerson.wordsPersonId = blogWords.wordsPersonId;
 update owner set nickname='12', name='123', title='243242', birth='1999-01-05T16:00:00.000Z', sex='男', email='22208982544@qq.com', job='前端', address='陕西榆林', motto='32321' where id=123;
 select  wordsPersonName, wordsPersonEmail, wordsArticleId, wordsContent, wordsTime, wordsReply from wordsperson, articlewords where  wordsperson.wordsPersonId = articlewords.wordsPersonId and articlewords.articleId = 1;
+delete from wordsPerson where wordsPersonId = (select wordsPersonId from articlewords where wordsArticleId = 1);

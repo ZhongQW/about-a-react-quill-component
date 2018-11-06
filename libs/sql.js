@@ -20,8 +20,12 @@ let BlogSQL = {
     getAllBlogWords: "select wordsBlogId, wordsPersonName, wordsPersonEmail, wordsTime, wordsContent, wordsReply from wordsPerson, blogWords where wordsPerson.wordsPersonId = blogWords.wordsPersonId;",
     getArticleWords: "select  wordsPersonName, wordsPersonEmail, articleId, wordsArticleId, wordsContent, wordsTime, wordsReply from wordsperson, articlewords where  wordsperson.wordsPersonId = articlewords.wordsPersonId and articlewords.articleId = ?;",
     articleDelWords: "delete from articlewords where wordsArticleId = ?",
-    articleReplyWords: "update articlewords set wordsReply = ? where wordsArticleId = ?",
-    articleDelReply: "update articlewords set wordsReply = '' where wordsArticleId = ?",
+    articleReplyWords: "update articlewords set wordsReply = ? where wordsArticleId = ?;",
+    articleDelReply: "update articlewords set wordsReply = '' where wordsArticleId = ?;",
+    addPerson: "insert into wordsPerson values(NULL, ?, ?)",
+    selectPerson: "select wordsPersonId from wordsPerson where wordsPersonName = ?;",
+    addArticleWords: "insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values(NULL, ?, ?, ?);",
+    getBlogWords: "select wordsBlogId, wordsPersonName, wordsTime, wordsContent, wordsReply from wordsPerson, blogWords where wordsPerson.wordsPersonId = blogWords.wordsPersonId;",
 };
 
 module.exports = BlogSQL;
