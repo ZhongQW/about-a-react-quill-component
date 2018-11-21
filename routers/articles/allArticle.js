@@ -1,11 +1,11 @@
 /*
     Create by WebStorm.
     User: ZhongQw
-    Date: 2018/11/13
-    Time: 21:49
+    Date: 2018/11/21
+    Time: 19:59
 */
-var allLifeArticle = function(db, blogSql, callback) {
-    db.query(blogSql.allLifeArticle, [], function(err, data) {
+var allArticle = function(db, blogSql, callback) {
+    db.query(blogSql.allArticle, [], function(err, data) {
         if(err) {
             callback({
                 'error' : true,
@@ -20,4 +20,4 @@ var allLifeArticle = function(db, blogSql, callback) {
     })
 };
 
-module.exports = allLifeArticle;
+module.exports = allArticle;

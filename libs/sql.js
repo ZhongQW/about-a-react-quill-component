@@ -8,8 +8,8 @@ let BlogSQL = {
     modifyOwner: "update owner set nickname=?, name=?, title=?, birth=?, sex=?, email=?, job=?, address=?, motto=? where id=123",
     delLogin: "delete from user where userId =?",
     delArticle: "delete from article where articleId=?",
-    updateArticle: "select articleContent from article where articleId=?",
-    updateArticleInfo: "update article set articleContent = ? where articleId = ?",
+    updateArticle: "select articleContent, articleTitle, articleType from article where articleId=?",
+    updateArticleInfo: "update article set articleContent = ? , articleTitle = ?, articleType = ? where articleId = ?",
     replyBlogWords: "update blogWords set wordsReply = ? where wordsBlogId = ?",
     // getBlogWords: "select * from blogWords",
     deleteBlogWords: "delete from blogwords where wordsBlogId = ?",
@@ -30,6 +30,7 @@ let BlogSQL = {
     allTechoArticle: "select * from article where articleType >= 10",
     addBlogWords: "insert into blogWords (wordsBlogId, wordsPersonId, wordsContent) values(NULL, ?, ?);",
     getGoodArticle: "select * from article where articleType = 100",
+    allArticle: "select * from article",
 };
 
 module.exports = BlogSQL;

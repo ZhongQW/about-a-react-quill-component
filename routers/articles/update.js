@@ -4,8 +4,8 @@
     Date: 2018/10/5
     Time: 15:51
 */
-const updateArticle = function(db, id, content, blogSql, callback){
-    db.query(blogSql.updateArticleInfo, [content, id], function(err,data){
+const updateArticle = function(db, id, content, title, type, blogSql, callback){
+    db.query(blogSql.updateArticleInfo, [content, title, type, id], function(err,data){
         // console.log(data);
         if(err){
             callback({

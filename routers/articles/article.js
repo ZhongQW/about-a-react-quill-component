@@ -12,6 +12,7 @@ const blogSql = require('../../libs/sql');
 const addArticle = require('./add');
 const deleteArticle = require('./delete');
 const updateArticle = require('./update');
+const allArticle = require('./allArticle');
 const allTechoArticle = require('./allTechoArticle');
 const allLifeArticle = require('./allLifeArticle');
 const oneArticle = require('./oneArticle');
@@ -35,16 +36,22 @@ router.use('/getall',function(req,res,next){
     console.log(typeof req.body.articleType);
     if(req.body.articleType === '-1'){
         allTechoArticle(db, blogSql, function (data) {
-            console.log(data);
+            // console.log(data);
             res.send(data);
         })
     }
     else {
         allLifeArticle(db, blogSql, function (data) {
-            console.log(data);
+            // console.log(data);
             res.send(data);
         })
     }
+});
+//管理层获取所有文章
+router.use('/getallarticle',function(req,res,next){
+    allArticle(db, blogSql, function(data){
+        res.send(data);
+    })
 });
 //删除某一篇文章
 router.use('/delete',function(req,res,next){
@@ -56,7 +63,38 @@ router.use('/delete',function(req,res,next){
 //修改文章
 router.use('/update',function(req,res,next){
     // console.log(req.body.val);
-    updateArticle(db, req.body.id,req.body.val , blogSql,  function(data){
+    updateArticle(db, req.body.id,req.body.val , req.body.title, req.body.type, blogSql,  function(data){
+        let type;
+        console.log(data.result[0].articleType);
+        switch(data.result[0].articleType){
+            case '1':
+                type = '生活'; break;
+            case '2':
+                type = '日记'; break;
+            case '3':
+                type = '美文'; break;
+            case '10':
+                type = 'java'; break;
+            case '11':
+                type = 'python'; break;
+            case '12':
+                type = 'c'; break;
+            case '13':
+                type = 'javascript'; break;
+            case '14':
+                type = 'css'; break;
+            case '15':
+                type = 'html'; break;
+            case '16':
+                type = 'bug调试'; break;
+            case '17':
+                type = '干货'; break;
+            case '100':
+                type = '精选'; break;
+            default:
+                type = 'javascript'; break;
+        }
+        data.result[0].articleType = type;
         res.send(data);
     })
 });
