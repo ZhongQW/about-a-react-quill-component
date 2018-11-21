@@ -4,9 +4,8 @@
     Date: 2018/10/5
     Time: 15:51
 */
-var allArticle = function(db, callback) {
-    var sql = 'SELECT * FROM `article`';
-    db.query(sql, function(err, data) {
+var allTechoArticle = function(db, blogSql, callback) {
+    db.query(blogSql.allTechoArticle, [], function(err, data) {
         if(err) {
             callback({
                 'error' : true,
@@ -21,4 +20,4 @@ var allArticle = function(db, callback) {
     })
 };
 
-module.exports = allArticle;
+module.exports = allTechoArticle;

@@ -26,6 +26,10 @@ let BlogSQL = {
     selectPerson: "select wordsPersonId from wordsPerson where wordsPersonName = ?;",
     addArticleWords: "insert into articleWords (wordsArticleId, wordsPersonId, articleId, wordsContent) values(NULL, ?, ?, ?);",
     getBlogWords: "select wordsBlogId, wordsPersonName, wordsTime, wordsContent, wordsReply from wordsPerson, blogWords where wordsPerson.wordsPersonId = blogWords.wordsPersonId;",
+    allLifeArticle: "select * from article where articleType < 10",
+    allTechoArticle: "select * from article where articleType >= 10",
+    addBlogWords: "insert into blogWords (wordsBlogId, wordsPersonId, wordsContent) values(NULL, ?, ?);",
+    getGoodArticle: "select * from article where articleType = 100",
 };
 
 module.exports = BlogSQL;

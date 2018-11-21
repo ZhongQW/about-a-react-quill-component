@@ -13,7 +13,7 @@ const addUser = function(db, wordsName, wordsEmail, blogSql, callback){
             })
         }else{
             db.query(blogSql.selectPerson, [wordsName], function(err,data){
-                // console.log(data);
+                console.log(data);
                 if(err){
                     callback({
                         'error': true,

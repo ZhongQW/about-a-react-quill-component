@@ -15,6 +15,7 @@ const getPerson = require('./getPerson');
 const replyWords = require('./replyWords');
 const delBlogReplyWords = require('./delBlogReply');
 const addArticleWords = require('./addArticleWords');
+const addBlogWords = require('./addBlogWords');
 const addUser = require('./adduser');
 
 const getBlogWords = require('./getBlogWords');
@@ -54,7 +55,7 @@ router.use('/deletereply',function(req,res,next){
         res.send(data);
     })
 });
-//增加一条留言
+//增加文章一条留言
 router.use('/addarticlewords',function(req,res,next){
     console.log(req.body);
     addArticleWords(db, req.body, blogSql, function(data){
@@ -73,6 +74,14 @@ router.use('/adduser',function(req,res,next){
 router.use('/getblogwords',function(req,res,next){
     console.log(req.body);
     getBlogWords(db, blogSql, function(data){
+        res.send(data);
+    })
+});
+//增加博客一条留言
+router.use('/addblogwords',function(req,res,next){
+    console.log(req.body);
+    addBlogWords(db, req.body.user_id, req.body.wordsContent, blogSql, function(data){
+        console.log(data);
         res.send(data);
     })
 });

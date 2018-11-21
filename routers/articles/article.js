@@ -12,9 +12,11 @@ const blogSql = require('../../libs/sql');
 const addArticle = require('./add');
 const deleteArticle = require('./delete');
 const updateArticle = require('./update');
-const allArticle = require('./allArticle');
+const allTechoArticle = require('./allTechoArticle');
+const allLifeArticle = require('./allLifeArticle');
 const oneArticle = require('./oneArticle');
 const oneArticleText = require('./oneArticleText');
+const getGoodArticle = require('./getGoodArticle');
 
 const getWords = require('./getwords');
 const articleDelWords = require('./articleDelWords');
@@ -30,10 +32,19 @@ router.use('/add',function(req,res,next){
 });
 //获取所有文章
 router.use('/getall',function(req,res,next){
-    allArticle(db,function(data){
-        // console.log(data);
-        res.send(data);
-    })
+    console.log(typeof req.body.articleType);
+    if(req.body.articleType === '-1'){
+        allTechoArticle(db, blogSql, function (data) {
+            console.log(data);
+            res.send(data);
+        })
+    }
+    else {
+        allLifeArticle(db, blogSql, function (data) {
+            console.log(data);
+            res.send(data);
+        })
+    }
 });
 //删除某一篇文章
 router.use('/delete',function(req,res,next){
@@ -101,6 +112,12 @@ router.use('/articledelreply',function(req,res,next){
     const articleId = req.body.articleId;
     articleDelReply(db, wordsId, articleId, blogSql, function(data){
         // console.log(data);
+        res.send(data);
+    })
+});
+//获取精选文章
+router.use('/getgoodarticle',function(req,res,next){
+    getGoodArticle(db, blogSql, function(data){
         res.send(data);
     })
 });
