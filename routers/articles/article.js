@@ -18,6 +18,7 @@ const allLifeArticle = require('./allLifeArticle');
 const oneArticle = require('./oneArticle');
 const oneArticleText = require('./oneArticleText');
 const getGoodArticle = require('./getGoodArticle');
+const getRecentlyArticle = require('./getRecentlyArticle');
 
 const getWords = require('./getwords');
 const articleDelWords = require('./articleDelWords');
@@ -156,6 +157,14 @@ router.use('/articledelreply',function(req,res,next){
 //获取精选文章
 router.use('/getgoodarticle',function(req,res,next){
     getGoodArticle(db, blogSql, function(data){
+        res.send(data);
+    })
+});
+
+//获取最近的7篇文章
+router.use('/getrecentlyarticle', function(req, res, next){
+    getRecentlyArticle(db, blogSql, function(data){
+        console.log(data.result[0]);
         res.send(data);
     })
 });
